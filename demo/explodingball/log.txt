@@ -1,0 +1,277 @@
+ALSA lib pcm_dmix.c:874:(snd_pcm_dmix_open) unable to open slave
+Current time 35 last timer 30
+Moving ball down by 0.001 (0) units
+Now at 0 0
+Current time 40 last timer 30
+Moving ball down by 0.002 (0) units
+Now at 0 0
+Current time 51 last timer 30
+Moving ball down by 0.0042 (0) units
+Now at 0 0
+Current time 58 last timer 30
+Moving ball down by 0.0056 (0) units
+Now at 0 0
+Current time 61 last timer 30
+Moving ball down by 0.0062 (0) units
+Now at 0 0
+Current time 64 last timer 30
+Moving ball down by 0.0068 (0) units
+Now at 0 0
+Current time 74 last timer 30
+Moving ball down by 0.0088 (0) units
+Now at 0 0
+Current time 82 last timer 30
+Moving ball down by 0.0104 (0) units
+Now at 0 0
+Current time 91 last timer 30
+Moving ball down by 0.0122 (0) units
+Now at 0 0
+Current time 100 last timer 30
+Moving ball down by 0.014 (0) units
+Now at 0 0
+Current time 112 last timer 30
+Moving ball down by 0.0164 (0) units
+Now at 0 0
+Current time 121 last timer 30
+Moving ball down by 0.0182 (0) units
+Now at 0 0
+Current time 131 last timer 30
+Moving ball down by 0.0202 (0) units
+Now at 0 0
+Current time 141 last timer 30
+Moving ball down by 0.0222 (0) units
+Now at 0 0
+Current time 150 last timer 30
+Moving ball down by 0.024 (0) units
+Now at 0 0
+Current time 159 last timer 30
+Moving ball down by 0.0258 (0) units
+Now at 0 0
+Current time 169 last timer 30
+Moving ball down by 0.0278 (0) units
+Now at 0 0
+Current time 177 last timer 30
+Moving ball down by 0.0294 (0) units
+Now at 0 0
+Current time 188 last timer 30
+Moving ball down by 0.0316 (0) units
+Now at 0 0
+Current time 197 last timer 30
+Moving ball down by 0.0334 (0) units
+Now at 0 0
+Current time 207 last timer 30
+Moving ball down by 0.0354 (0) units
+Now at 0 0
+Current time 215 last timer 30
+Moving ball down by 0.037 (0) units
+Now at 0 0
+Current time 224 last timer 30
+Moving ball down by 0.0388 (0) units
+Now at 0 0
+Current time 234 last timer 30
+Moving ball down by 0.0408 (0) units
+Now at 0 0
+Current time 243 last timer 30
+Moving ball down by 0.0426 (0) units
+Now at 0 0
+Current time 251 last timer 30
+Moving ball down by 0.0442 (0) units
+Now at 0 0
+Current time 260 last timer 30
+Moving ball down by 0.046 (0) units
+Now at 0 0
+Current time 268 last timer 30
+Moving ball down by 0.0476 (0) units
+Now at 0 0
+Current time 277 last timer 30
+Moving ball down by 0.0494 (0) units
+Now at 0 0
+Current time 286 last timer 30
+Moving ball down by 0.0512 (0) units
+Now at 0 0
+Current time 295 last timer 30
+Moving ball down by 0.053 (0) units
+Now at 0 0
+Current time 307 last timer 30
+Moving ball down by 0.0554 (0) units
+Now at 0 0
+Current time 316 last timer 30
+Moving ball down by 0.0572 (0) units
+Now at 0 0
+Current time 325 last timer 30
+Moving ball down by 0.059 (0) units
+Now at 0 0
+Current time 333 last timer 30
+Moving ball down by 0.0606 (0) units
+Now at 0 0
+Current time 343 last timer 30
+Moving ball down by 0.0626 (0) units
+Now at 0 0
+Current time 351 last timer 30
+Moving ball down by 0.0642 (0) units
+Now at 0 0
+Current time 360 last timer 30
+Moving ball down by 0.066 (0) units
+Now at 0 0
+Current time 369 last timer 30
+Moving ball down by 0.0678 (0) units
+Now at 0 0
+Current time 377 last timer 30
+Moving ball down by 0.0694 (0) units
+Now at 0 0
+Current time 386 last timer 30
+Moving ball down by 0.0712 (0) units
+Now at 0 0
+Current time 399 last timer 30
+Moving ball down by 0.0738 (0) units
+Now at 0 0
+Current time 408 last timer 30
+Moving ball down by 0.0758 (0) units
+Now at 0 0
+Current time 422 last timer 30
+Moving ball down by 0.0784 (0) units
+Now at 0 0
+Current time 431 last timer 30
+Moving ball down by 0.0802 (0) units
+Now at 0 0
+Current time 440 last timer 30
+Moving ball down by 0.082 (0) units
+Now at 0 0
+Current time 449 last timer 30
+Moving ball down by 0.0838 (0) units
+Now at 0 0
+Current time 457 last timer 30
+Moving ball down by 0.0854 (0) units
+Now at 0 0
+Current time 468 last timer 30
+Moving ball down by 0.0876 (0) units
+Now at 0 0
+Current time 478 last timer 30
+Moving ball down by 0.0896 (0) units
+Now at 0 0
+Current time 487 last timer 30
+Moving ball down by 0.0914 (0) units
+Now at 0 0
+Current time 496 last timer 30
+Moving ball down by 0.0932 (0) units
+Now at 0 0
+Current time 506 last timer 30
+Moving ball down by 0.0954 (0) units
+Now at 0 0
+Current time 516 last timer 30
+Moving ball down by 0.0972 (0) units
+Now at 0 0
+Current time 525 last timer 30
+Moving ball down by 0.099 (0) units
+Now at 0 0
+Current time 533 last timer 30
+Moving ball down by 0.1006 (0) units
+Now at 0 0
+Current time 545 last timer 30
+Moving ball down by 0.103 (0) units
+Now at 0 0
+Current time 555 last timer 30
+Moving ball down by 0.105 (0) units
+Now at 0 0
+Current time 565 last timer 30
+Moving ball down by 0.107 (0) units
+Now at 0 0
+Current time 575 last timer 30
+Moving ball down by 0.109 (0) units
+Now at 0 0
+Current time 586 last timer 30
+Moving ball down by 0.1112 (0) units
+Now at 0 0
+Current time 595 last timer 30
+Moving ball down by 0.113 (0) units
+Now at 0 0
+Current time 607 last timer 30
+Moving ball down by 0.1154 (0) units
+Now at 0 0
+Current time 616 last timer 30
+Moving ball down by 0.1172 (0) units
+Now at 0 0
+Current time 625 last timer 30
+Moving ball down by 0.119 (0) units
+Now at 0 0
+Current time 633 last timer 30
+Moving ball down by 0.1206 (0) units
+Now at 0 0
+Current time 643 last timer 30
+Moving ball down by 0.1226 (0) units
+Now at 0 0
+Current time 651 last timer 30
+Moving ball down by 0.1244 (0) units
+Now at 0 0
+Current time 660 last timer 30
+Moving ball down by 0.126 (0) units
+Now at 0 0
+Current time 669 last timer 30
+Moving ball down by 0.128 (0) units
+Now at 0 0
+Current time 678 last timer 30
+Moving ball down by 0.1296 (0) units
+Now at 0 0
+Current time 687 last timer 30
+Moving ball down by 0.1314 (0) units
+Now at 0 0
+Current time 698 last timer 30
+Moving ball down by 0.1336 (0) units
+Now at 0 0
+Current time 707 last timer 30
+Moving ball down by 0.1354 (0) units
+Now at 0 0
+Current time 718 last timer 30
+Moving ball down by 0.1376 (0) units
+Now at 0 0
+Current time 727 last timer 30
+Moving ball down by 0.1394 (0) units
+Now at 0 0
+Current time 737 last timer 30
+Moving ball down by 0.1414 (0) units
+Now at 0 0
+Current time 748 last timer 30
+Moving ball down by 0.1436 (0) units
+Now at 0 0
+Current time 757 last timer 30
+Moving ball down by 0.1454 (0) units
+Now at 0 0
+Current time 765 last timer 30
+Moving ball down by 0.147 (0) units
+Now at 0 0
+Current time 774 last timer 30
+Moving ball down by 0.1488 (0) units
+Now at 0 0
+Current time 785 last timer 30
+Moving ball down by 0.151 (0) units
+Now at 0 0
+Current time 796 last timer 30
+Moving ball down by 0.1532 (0) units
+Now at 0 0
+Current time 806 last timer 30
+Moving ball down by 0.1552 (0) units
+Now at 0 0
+Current time 816 last timer 30
+Moving ball down by 0.1572 (0) units
+Now at 0 0
+Current time 825 last timer 30
+Moving ball down by 0.159 (0) units
+Now at 0 0
+Current time 833 last timer 30
+Moving ball down by 0.161 (0) units
+Now at 0 0
+Current time 847 last timer 30
+Moving ball down by 0.1634 (0) units
+Now at 0 0
+Current time 855 last timer 30
+Moving ball down by 0.165 (0) units
+Now at 0 0
+Current time 865 last timer 30
+Moving ball down by 0.167 (0) units
+Now at 0 0
+Current time 874 last timer 30
+Moving ball down by 0.1688 (0) units
+Now at 0 0
+Current time 883 last timer 30
+Moving ball down by 0.1708 (0) units
+Now at 0 0

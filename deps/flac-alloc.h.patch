@@ -1,0 +1,15 @@
+--- flac-1.2.1/include/share/alloc.h	2007-09-12 01:32:21 -0400
++++ flac-1.2.1/include/share/alloc.new.h	2011-05-22 13:52:19 -0400
+@@ -35,11 +35,7 @@
+ 
+ #ifndef SIZE_MAX
+ # ifndef SIZE_T_MAX
+-#  ifdef _MSC_VER
+-#   define SIZE_T_MAX UINT_MAX
+-#  else
+-#   error
+-#  endif
++#  define SIZE_T_MAX UINT_MAX
+ # endif
+ # define SIZE_MAX SIZE_T_MAX
+ #endif
