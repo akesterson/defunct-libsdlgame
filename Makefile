@@ -9,51 +9,62 @@ ifndef $(OS)
 	OS=linux
 endif
  
-LIBNAME=game
+LIBNAME=sdlgame
 PROJECTHOME=$(shell pwd)
 SDL_CFLAGS=$(shell sdl-config --cflags)
 SDL_LDFLAGS=$(shell sdl-config --static-libs)
 LIBDIR=/usr/lib
 HEADERDIR=/usr/include
 ADDL_CFLAGS=
+OBJDIR=libsdlgame
+EXESUFFIX=
+LIBSUFFIX=
 
 ifeq "$(OS)" "mingw32"
 	ADDL_CFLAGS=-mwindows
+	EXESUFFIX=".exe"
+	LIBSUFFIX=".a"
 endif
 
 ifeq "$(CFG)" "Debug"
 	OUTDIR=Debug
-	LIBTARGET=lib$(LIBNAME)-dbg
+	LIBTARGET=lib$(LIBNAME)-dbg$(LIBSUFFIX)
 	LINKLIB=game-dbg
 	CXXFLAGS=-pg -I./source -g -ggdb -gstabs -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 
 ifeq "$(CFG)" "Release"
 	OUTDIR=Release
-	LIBTARGET=lib$(LIBNAME)
+	LIBTARGET=lib$(LIBNAME)$(LIBSUFFIX)
 	LINKLIB=game
 	CXXFLAGS=-I./source -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 
 LINKLIBS=-L../../$(CFG) -L$(OUTDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer
 
-LIBOBJ=$(OUTDIR)/Common.o \
-	$(OUTDIR)/FontRenderer.o \
-	$(OUTDIR)/Renderable.o \
-	$(OUTDIR)/SpriteStrip.o \
-	$(OUTDIR)/Animation.o \
-	$(OUTDIR)/Actor.o \
-	$(OUTDIR)/Display.o \
-	$(OUTDIR)/Display2D.o \
-	$(OUTDIR)/MenuDisplay.o \
-	$(OUTDIR)/Game.o
+LIBOBJ=$(OBJDIR)/Common.o \
+	$(OBJDIR)/FontRenderer.o \
+	$(OBJDIR)/Renderable.o \
+	$(OBJDIR)/SpriteStrip.o \
+	$(OBJDIR)/Animation.o \
+	$(OBJDIR)/Actor.o \
+	$(OBJDIR)/Display.o \
+	$(OBJDIR)/Display2D.o \
+	$(OBJDIR)/MenuDisplay.o \
+	$(OBJDIR)/Game.o
+
+DEMOS=bouncingball \
+	exploder \
+	explodingball \
+	frictionball \
+	gravity
 
 CC = gcc
 CXX = g++
 LD = $(CXX)
 INSTALL = $(shell which install)
 
-$(OUTDIR)/%.o : %.cpp
+$(OUTDIR)/%.o : $(OBJDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -o $@ $<
 ifeq "$(OS)" "macosx"
 all: sharedlib
@@ -74,12 +85,13 @@ docs:
 
 .PHONY: clean
 clean:
-	rm -f $(OUTDIR)/*.o
+	rm -f $(OBJDIR)/*.o
 	rm -f $(OUTDIR)/$(LIBTARGET).*
-
+	rm -rf docs/*
+	cd demo && for dir in $(DEMOS); do cd $$dir && make CFG=$(CFG) OS=$(OS) clean; if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
 .PHONY: demos
 demos:
-	cd demo && ./build-demos.sh $(CFG)
+	cd demo && for dir in $(DEMOS); do cd $$dir && make CFG=$(CFG) OS=$(OS); if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
 
 .PHONY: rebuild
 rebuild:
@@ -90,8 +102,13 @@ rebuild:
 .PHONY: install
 install:
 	$(INSTALL) $(OUTDIR)/$(LIBTARGET)* $(LIBDIR)/
-	mkdir -p $(HEADERDIR)/libgame
-	$(INSTALL) *h $(HEADERDIR)/libgame/
+	mkdir -p $(HEADERDIR)/libsdlgame
+	$(INSTALL) $(OBJDIR)/*h $(HEADERDIR)/libsdlgame/
+
+.PHONY: uninstall
+uninstall:
+	rm $(LIBDIR)/$(LIBTARGET)*
+	rm -rf $(HEADERDIR)/libsdlgame
 
 .PHONY: deps
 deps:

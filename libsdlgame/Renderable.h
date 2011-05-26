@@ -29,7 +29,7 @@ protected:
  * @class AnimatedRenderable
  * @brief A subclass of Renderable for objects that are renderable and animated
  *
- * This subclass defines the interface for libgame objects that are both
+ * This subclass defines the interface for libsdlgame objects that are both
  * Renderable, but that also perform some kind of internal logic to return
  * different surfaces each call. 
  */

@@ -35,8 +35,8 @@ ifeq "$(CFG)" "Release"
 	else
 		BINTARGET=$(TARGET)
 	endif
-	LINKLIB=game
-	CXXFLAGS=-I../../../ -I$(HEADERDIR)  -I./cpp -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
+	LINKLIB=sdlgame
+	CXXFLAGS=-I../../ -I$(HEADERDIR)  -I./cpp -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 ifeq "$(CFG)" "Debug"
 	OUTDIR=Debug
@@ -45,8 +45,8 @@ ifeq "$(CFG)" "Debug"
 	else
 		BINTARGET=$(TARGET)-dbg
 	endif
-	LINKLIB=game-dbg
-	CXXFLAGS=-I../../../ -I$(HEADERDIR) -I./cpp  -pg -g -ggdb -gstabs -Wall -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
+	LINKLIB=sdlgame-dbg
+	CXXFLAGS=-I../../ -I$(HEADERDIR) -I./cpp  -pg -g -ggdb -gstabs -Wall -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 
 LINKLIBS=-L../../$(CFG) -L$(LIBDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer -lSDL_gfx -lSDL_ttf
