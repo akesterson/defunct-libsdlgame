@@ -15,15 +15,35 @@ Display::~Display()
     }
 }
 
+/**
+ * @return integer, 0 for inactive, 1 for active
+ * @brief return the active state of this display
+ */
+
 int Display::isActive()
 {
     return this->active;
 }
 
+/**
+ * @param active integer, 0 or 1
+ * @brief Toggle the active flag on this display
+ */
+
 void Display::setActive(int active)
 {
     this->active = active;
 }
+
+/**
+ * @param pos Vector, position of this window relative to any parents
+ * @param w integer, width of the canvas
+ * @param h integer, height of the canvas
+ * @param depth integer, bit depth of the canvas
+ * @param flags integer, flags passed to SDL_CreateRGBSurface
+ * @brief Setup the rendering surface this display will use
+ * @return 0 on success, 1 on failure
+ */
 
 int Display::initVideo(Vector pos, int w, int h, int depth, int flags)
 {
@@ -48,6 +68,14 @@ int Display::initVideo(Vector pos, int w, int h, int depth, int flags)
     return 0;
 }
 
+/**
+ * @param actor Actor *, the actor to add to the actor list
+ * @brief Add 'actor' to this display
+ * @return 0 on success, 1 on failure
+ *
+ * Adds an actor to this display's actor list to be managed on the canvas. 
+ * Actors are pushed to the back end of the list by default.
+ */
 int Display::addActor(Actor *actor)
 {
      if ( actor == NULL ) {
@@ -67,6 +95,12 @@ int Display::addActor(Actor *actor)
      return 0;
 }
 
+/**
+ * @param index unsigned integer
+ * @brief return the actor at index 'index' of this display's actor list
+ * @return (Actor *), actor if present in the list, or NULL otherwise
+ */
+
 Actor *Display::getActor(unsigned int index)
 {
     if ( index < this->actors.size() ) {
@@ -75,6 +109,11 @@ Actor *Display::getActor(unsigned int index)
     return NULL;
 }
 
+/**
+ * @param actor (Actor *), actor to remove from this display
+ * @return 0 on success, 1 on failure
+ * @brief Remove a given actor from this display's actor list
+ */
 int Display::removeActor(Actor *actor)
 {
     ActorListIterator iter = this->actors.begin();
@@ -100,11 +139,19 @@ SDL_Surface *Display::nextFrame()
     }
 }
 
+/**
+ * @return SDL_PixelFormat
+ * @brief return the pixel format of the current canvas
+ */
 SDL_PixelFormat *Display::pixelFormat()
 {
     return this->canvas->format;
 }
 
+/**
+ * @param userType (unsigned int) the user type to check for
+ * @brief Returns a count of all objects in this display's actor list that match the given user defined type
+ */ 
 int Display::objectsOfType(unsigned int userType)
 {
     int ocount = 0;

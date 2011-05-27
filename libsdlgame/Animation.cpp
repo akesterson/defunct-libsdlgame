@@ -4,12 +4,12 @@
 #include "Actor.h"
 #include <iostream>
 
-// TODO: Animation has mysterious segfault problems when it is used static; e.g.
-//
-//	Animation anim; <-- using this object will eventually cause a segfault thru the framecounters/indexers
-//	..
-//	Animation *anim = new Animation() <-- ... using this one will not
-
+/** TODO: Animation has mysterious segfault problems when it is used static; e.g.
+ *
+ *	Animation anim; <-- using this object will eventually cause a segfault thru the framecounters/indexers
+ *	..
+ *	Animation *anim = new Animation() <-- ... using this one will not
+ */
 Animation::Animation()
 {
     this->strip = NULL;
@@ -23,6 +23,15 @@ Animation::~Animation()
 {
 }
 
+/**
+ * @brief Sets the sprite strip used by this animation
+ * @param strip sprite strip from which animation frames should be pulled
+ * @param fps lock the animation speed to a given frames per second
+ * @param loop 0 = play once and stop, 1 = loop continually
+ * @param anchor The actual position of this animation in relation to the actor using it
+ *
+ * Doxygen doesn't show the fourth parameter to this function for some reason. it is (Vector anchor) and defaults to {0,0,0}
+ */
 int Animation::setStrip(SpriteStrip *strip, int fps, int loop, Vector anchor)
 {
     if ( strip == NULL ) {
@@ -42,9 +51,22 @@ int Animation::setStrip(SpriteStrip *strip, int fps, int loop, Vector anchor)
     return 0;
 }
 
-// FIXME : The way this interaction works is INCREDIBLY hackish. I should look
-// at collapsing the nextFrame() functionality into Actor, and basically redoing the
-// Animation class as a structure that does nothing. For now, though, this works.
+/**
+ * @brief Return the next frame of this animation to be rendered
+ * @param curFrame Frame to render, or 0 if actorSource is set
+ * @param lastTime Last update time, or 0 if actorSource is set
+ * @param actorSource The actor for which this animation is being rendered, or NULL
+ * 
+ * Performs logic necessary to check time from lastTime vs current time to return the
+ * appropriate frame. If actorSource is set, it will pull a FrameCounter from that actor
+ * to use for curFrame/lastTime.
+ *
+ * FIXME : The way this interaction works is INCREDIBLY hackish. I should look
+ * at collapsing the nextFrame() functionality into Actor, and basically redoing the
+ * Animation class as a structure that does nothing. For now, though, this works.
+ *
+ * @return (SDL_Surface *) Will return the first frame of animation if the animation is stopped, otherwise will return the current frame. Will only return NULL if the Animation has no frames assigned.
+ */
 
 SDL_Surface *Animation::nextFrame(int curFrame, int lastTime, AnimatedRenderable *actorSource)
 {
@@ -90,6 +112,11 @@ SDL_Surface *Animation::nextFrame(int curFrame, int lastTime, AnimatedRenderable
 	return toRet;
 }
 
+/**
+ * @brief return the number of frames in this animation
+ * @return integer
+ */
+
 int Animation::numFrames()
 {
     if ( this->strip != NULL ) { 
@@ -98,6 +125,10 @@ int Animation::numFrames()
     return 0;
 }
 
+/**
+ * @brief Return a new vector modified by the anchor vector
+ * @return a new vector
+ */
 Vector Animation::anchorAt(Vector position)
 {
     Vector newVector;

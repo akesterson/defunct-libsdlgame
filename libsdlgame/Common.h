@@ -3,8 +3,16 @@
 
 #include <SDL.h>
 
+/**
+ * @def GAMEFPS
+ * Redefine this value to change the FPS you want the game to lock to (USUALLY works)
+*/
 #define GAMEFPS		60
 
+/**
+ * @struct Vector
+ * @brief A simple way of representing a 3-dimensional point or vector
+ */
 struct Vector
 {
     float x;
@@ -12,13 +20,21 @@ struct Vector
     float z;
 };
 
+/**
+ * @typedef Point
+ * @brief A convenient typedef for Vector
+ */
 typedef Vector Point;
 
+/**
+ * @struct FrameCounter
+ * @brief A structure to use for counting frame times and positions
+ */
 struct FrameCounter
 {
-    unsigned int curFrame;
-    unsigned int lastTime;
-    SDL_Surface *lastFrame;
+  unsigned int curFrame; /**< current frame */
+  unsigned int lastTime; /**< ticks at last logic */
+  SDL_Surface *lastFrame; /**< previous frame returned by this counter */
 };
 
 /**
@@ -32,7 +48,7 @@ struct FrameCounter
 class SharedCanvas2D
 {
 protected:
-    SDL_Surface *canvas;
+  SDL_Surface *canvas; /**< actual SDL_Surface used by this SharedCanvas */
 public:
     SharedCanvas2D();
     virtual ~SharedCanvas2D();

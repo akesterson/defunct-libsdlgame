@@ -3,15 +3,11 @@ all: clean packages
 CFLAGS=$(CFLAGS) -I/usr/local/include -I/usr/include
 LDFLAGS=$(LDFLAGS) -L/usr/local/lib -L/usr/lib
 
-.PHONY: files
-files:
-	wget http://downloads.xiph.org/releases/theora/libtheora-1.1.1.tar.bz2
-
 .PHONY: packages
-packages: SDL_main zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2
+packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg
 
-.PHONY: SDL_main
-SDL_main:
+.PHONY: SDL
+SDL:
 	wget http://www.libsdl.org/release/SDL-1.2.14.tar.gz
 	tar -zxvf SDL-1.2.14.tar.gz
 	cd SDL-1.2.14 && ./configure  && make && make install
@@ -116,6 +112,37 @@ libxml2:
 doxygen:
 	wget http://ftp.stack.nl/pub/users/dimitri/doxygen-1.7.4.windows.bin.zip
 	unzip -od /bin doxygen-1.7.4.windows.bin.zip
+
+# Just for the record - cmake is fuckin bullshit.
+.PHONY: cmake
+cmake:
+	wget http://www.cmake.org/files/v2.8/cmake-2.8.4-win32-x86.zip
+	unzip cmake-2.8.4-win32-x86.zip
+	cp -vR cmake-2.8.4-win32-x86/* /usr/local/
+#wget http://www.cmake.org/files/v2.8/cmake-2.8.4.tar.gz
+#cd cmake-2.8.4 && ./configure && make && make install
+
+.PHONY: ffmpeg
+ffmpeg:
+	wget http://www.ffmpeg.org/releases/ffmpeg-0.7-rc1.tar.gz
+	tar -zxvf ffmpeg-0.6.3.tar.gz
+	cd ffmpeg-0.6.3 && ./configure $(FFMPEG_CONFIGURE_FLAGS) && make && make install
+
+.PHONY: SDL_ffmpeg
+SDL_ffmpeg:
+	wget http://www.arjanhouben.nl/SDL_ffmpeg/1.3.1/SDL_ffmpeg-1.3.1.tar.gz
+	tar -zxvf SDL_ffmpeg-1.3.1.tar.gz
+	cd SDL_ffmpeg && cmake -G "MSYS Makefiles" . && make
+	cp SDL_ffmpeg/lib/libSDL_ffmpeg.dll.a /usr/local/lib/
+	cp SDL_ffmpeg/include/SDL/SDL_ffmpeg.h /usr/local/include
+
+.PHONY: yaml-cpp
+yaml-cpp:
+	wget http://yaml-cpp.googlecode.com/files/yaml-cpp-0.2.6.tar.gz
+	tar -zxvf yaml-cpp-0.2.6.tar.gz
+	cd yaml-cpp && cmake -G "MSYS Makefiles" . && make
+	cp -vR yaml-cpp/include/yaml-cpp /usr/local/include/
+	cp yaml-cpp/libyaml-cpp.a /usr/local/lib/
 
 .PHONY: clean
 clean:	

@@ -81,7 +81,7 @@ staticlib: $(LIBOBJ)
 
 .PHONY: docs
 docs:
-	doxygen doxygen.conf
+	cd libsdlgame && doxygen doxygen.conf
 
 .PHONY: clean
 clean:
