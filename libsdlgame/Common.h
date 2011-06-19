@@ -5,7 +5,8 @@
 
 /**
  * @def GAMEFPS
- * Redefine this value to change the FPS you want the game to lock to (USUALLY works)
+ * Redefine this value to change the FPS you want the game to lock to 
+ * (USUALLY works)
 */
 #define GAMEFPS		60
 

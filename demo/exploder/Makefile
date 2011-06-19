@@ -21,10 +21,10 @@ HEADERDIR=/usr/include
 ADDL_CFLAGS=
 
 ifeq "$(OS)" "mingw32"
-	ADDL_CFLAGS=-mwindows -DBUILD_MINGW32
+	ADDL_CFLAGS=-mwindows -DBUILD_MINGW32 -rdynamic
 endif
 ifeq "$(OS)" "linux"
-	ADDL_CFLAGS=-DBUILD_LINUX
+	ADDL_CFLAGS=-DBUILD_LINUX -rdynamic
 endif 
 
 # default for release configs
@@ -36,7 +36,7 @@ ifeq "$(CFG)" "Release"
 		BINTARGET=$(TARGET)
 	endif
 	LINKLIB=sdlgame
-	CXXFLAGS=-I../../ -I$(HEADERDIR)  -I./cpp -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
+	CXXFLAGS=-I../../ -I$(HEADERDIR) -I./cpp -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 ifeq "$(CFG)" "Debug"
 	OUTDIR=Debug
@@ -53,6 +53,10 @@ LINKLIBS=-L../../$(CFG) -L$(LIBDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSD
 
 BINOBJ=$(OUTDIR)/demo.o
 
+ifeq "$(OS)" "mingw32"
+	BTOBJ=$(OUTDIR)/backtrace.dll
+endif
+
 CC = gcc
 CXX = g++
 LD = $(CXX)
@@ -63,14 +67,30 @@ $(OUTDIR)/%.o : cpp/%.cpp
 
 all: bin
 
-bin: $(BINOBJ)
+.PHONY: $(BTOBJ)
+$(BTOBJ): 
+	cp /usr/local/lib/backtrace.dll $(OUTDIR)/
+	cp /usr/local/lib/av*dll $(OUTDIR)/
+	cp /usr/local/lib/swscale*dll $(OUTDIR)/
+	cp /usr/local/bin/*SDL*dll $(OUTDIR)/
+	cp /usr/local/bin/freetype*dll $(OUTDIR)/
+	cp /usr/local/bin/*png*dll $(OUTDIR)/
+	cp /usr/local/bin/*jpeg*dll $(OUTDIR)/
+	cp /usr/local/bin/libimage*dll $(OUTDIR)/
+	cp /usr/local/bin/libogg*dll $(OUTDIR)/
+	cp /usr/local/bin/*vorbis*dll $(OUTDIR)/
+	cp /usr/local/bin/librle*dll $(OUTDIR)/
+	cp /usr/local/bin/libtiff*dll $(OUTDIR)/
+	cp /usr/local/bin/libxml2*dll $(OUTDIR)/
+	cp /usr/local/bin/zlib*dll $(OUTDIR)/
+
+bin: $(BINOBJ) $(BTOBJ)
 	$(LD) -pg -o $(OUTDIR)/$(BINTARGET) \
 		-pg $(BINOBJ) $(LINKLIBS)  
 
 .PHONY: clean
 clean:
-	rm -f $(OUTDIR)/*.o
-	rm -f $(OUTDIR)/$(BINTARGET)
+	rm -f $(OUTDIR)/*
 
 .PHONY: rebuild
 rebuild:

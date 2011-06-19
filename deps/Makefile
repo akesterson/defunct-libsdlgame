@@ -4,7 +4,7 @@ CFLAGS=$(CFLAGS) -I/usr/local/include -I/usr/include
 LDFLAGS=$(LDFLAGS) -L/usr/local/lib -L/usr/lib
 
 .PHONY: packages
-packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg
+packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg backtrace
 
 .PHONY: SDL
 SDL:
@@ -143,6 +143,11 @@ yaml-cpp:
 	cd yaml-cpp && cmake -G "MSYS Makefiles" . && make
 	cp -vR yaml-cpp/include/yaml-cpp /usr/local/include/
 	cp yaml-cpp/libyaml-cpp.a /usr/local/lib/
+
+.PHONY: backtrace
+backtrace:
+	svn checkout http://backtrace-mingw.googlecode.com/svn/trunk/ backtrace-mingw-read-only
+	cd backtrace-mingw-read-only && make && cp backtrace.dll /usr/local/lib/
 
 .PHONY: clean
 clean:	

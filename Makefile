@@ -4,9 +4,9 @@
 ifndef $(CFG)
 	CFG=Debug
 endif
-# you can also pass : mingw32 and macosx
+# you can also pass : linux and macosx
 ifndef $(OS)
-	OS=linux
+	OS=mingw32
 endif
  
 LIBNAME=sdlgame
@@ -21,9 +21,17 @@ EXESUFFIX=
 LIBSUFFIX=
 
 ifeq "$(OS)" "mingw32"
-	ADDL_CFLAGS=-mwindows
-	EXESUFFIX=".exe"
-	LIBSUFFIX=".a"
+	ADDL_CFLAGS=-rdynamic -mwindows -DOS_WIN32
+	EXESUFFIX=.exe
+	LIBSUFFIX=.a
+endif
+
+ifeq "$(OS)" "macosx"
+	ADDL_CFLAGS=-rdynamic -DOS_MACOSX
+endif
+
+ifeq "$(OS)" "linux"
+	ADDL_CFLAGS=-rdynamic -DOS_LINUX
 endif
 
 ifeq "$(CFG)" "Debug"
@@ -42,7 +50,8 @@ endif
 
 LINKLIBS=-L../../$(CFG) -L$(OUTDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer
 
-LIBOBJ=$(OBJDIR)/Common.o \
+LIBOBJ=$(OBJDIR)/Backtrace.o \
+	$(OBJDIR)/Common.o \
 	$(OBJDIR)/FontRenderer.o \
 	$(OBJDIR)/Renderable.o \
 	$(OBJDIR)/SpriteStrip.o \
@@ -53,11 +62,14 @@ LIBOBJ=$(OBJDIR)/Common.o \
 	$(OBJDIR)/MenuDisplay.o \
 	$(OBJDIR)/Game.o
 
-DEMOS=bouncingball \
+DEMOS=backtrace \
+	bouncingball \
 	exploder \
 	explodingball \
 	frictionball \
-	gravity
+	helloworld \
+	gravity \
+	tilemap \
 
 CC = gcc
 CXX = g++
@@ -91,7 +103,7 @@ clean:
 	cd demo && for dir in $(DEMOS); do cd $$dir && make CFG=$(CFG) OS=$(OS) clean; if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
 .PHONY: demos
 demos:
-	cd demo && for dir in $(DEMOS); do cd $$dir && make CFG=$(CFG) OS=$(OS); if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
+	cd demo && for dir in $(DEMOS); do cd $$dir && make "ADDL_CFLAGS=$(ADDL_CFLAGS)" CFG=$(CFG) OS=$(OS); if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
 
 .PHONY: rebuild
 rebuild:

@@ -1,6 +1,7 @@
 #ifndef __LIBGAME_H__
 #define __LIBGAME_H__
 
+#include "Backtrace.h"
 #include "Common.h"
 #include "FontRenderer.h"
 #include "Renderable.h"
