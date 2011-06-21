@@ -1,0 +1,65 @@
+all: clean packages
+#all: packages
+
+#
+.PHONY: packages
+packages: SDL SDL_image SDL_mixer SDL_ttf SDL_gfx libxml2 cmake yasm ffmpeg SDL_ffmpeg yaml-cpp
+
+.PHONY: SDL
+SDL:
+	sudo apt-get install libsdl-dev
+
+.PHONY:
+SDL_image:
+	sudo apt-get install libsdl-image1.2-dev
+
+.PHONY: SDL_mixer
+SDL_mixer:
+	sudo apt-get install libsdl-mixer1.2-dev
+
+.PHONY: SDL_ttf
+SDL_ttf:
+	sudo apt-get install libsdl-ttf2.0-dev
+
+.PHONY: SDL_gfx
+SDL_gfx:
+	sudo apt-get install libsdl-gfx1.2-dev
+
+.PHONY: cmake
+cmake:
+	sudo apt-get install cmake
+
+.PHONY: yasm
+yasm:
+	sudo apt-get install yasm
+
+.PHONY: ffmpeg
+ffmpeg:
+	wget http://www.ffmpeg.org/releases/ffmpeg-0.7-rc1.tar.gz
+	tar -zxvf ffmpeg-0.7-rc1.tar.gz
+	cd ffmpeg-0.7-rc1 && ./configure $(FFMPEG_CONFIGURE_FLAGS) && make && make install
+
+.PHONY: SDL_ffmpeg
+SDL_ffmpeg:
+	wget http://www.arjanhouben.nl/SDL_ffmpeg/1.3.1/SDL_ffmpeg-1.3.1.tar.gz
+	tar -zxvf SDL_ffmpeg-1.3.1.tar.gz
+	cd SDL_ffmpeg && cmake -G "MSYS Makefiles" . && make
+	cp SDL_ffmpeg/lib/libSDL_ffmpeg.dll.a /usr/local/lib/
+	cp SDL_ffmpeg/include/SDL/SDL_ffmpeg.h /usr/local/include
+
+.PHONY: yaml-cpp
+yaml-cpp:
+	wget http://yaml-cpp.googlecode.com/files/yaml-cpp-0.2.6.tar.gz
+	tar -zxvf yaml-cpp-0.2.6.tar.gz
+	cd yaml-cpp && cmake -G "MSYS Makefiles" . && make
+	cp -vR yaml-cpp/include/yaml-cpp /usr/local/include/
+	cp yaml-cpp/libyaml-cpp.a /usr/local/lib/
+
+.PHONY: libxml2
+libxml2:
+	sudo apt-get install libxml2-dev
+
+.PHONY: clean
+clean:	
+	rm -rf *gz *zip *bz2
+	find . -maxdepth 1 -type d -iname "[a-zA-Z0-9]*" -exec rm -rf \{\} \;

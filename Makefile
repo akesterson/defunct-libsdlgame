@@ -24,14 +24,18 @@ ifeq "$(OS)" "mingw32"
 	ADDL_CFLAGS=-rdynamic -mwindows -DOS_WIN32
 	EXESUFFIX=.exe
 	LIBSUFFIX=.a
+	DEPMAKEFILE=Makefile.mingw32
 endif
 
 ifeq "$(OS)" "macosx"
 	ADDL_CFLAGS=-rdynamic -DOS_MACOSX
+	DEPMAKEFILE=Makefile.macosx
 endif
 
 ifeq "$(OS)" "linux"
 	ADDL_CFLAGS=-rdynamic -DOS_LINUX
+	DEPMAKEFILE=Makefile.apt
+	LIBSUFFIX=.a
 endif
 
 ifeq "$(CFG)" "Debug"
@@ -101,6 +105,7 @@ clean:
 	rm -f $(OUTDIR)/$(LIBTARGET).*
 	rm -rf docs/*
 	cd demo && for dir in $(DEMOS); do cd $$dir && make CFG=$(CFG) OS=$(OS) clean; if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
+
 .PHONY: demos
 demos:
 	cd demo && for dir in $(DEMOS); do cd $$dir && make "ADDL_CFLAGS=$(ADDL_CFLAGS)" CFG=$(CFG) OS=$(OS); if [ $$? -ne 0 ]; then exit 1 ; fi; cd .. ; done
@@ -124,4 +129,4 @@ uninstall:
 
 .PHONY: deps
 deps:
-	cd deps && make
+	cd deps && make -f $(DEPMAKEFILE)

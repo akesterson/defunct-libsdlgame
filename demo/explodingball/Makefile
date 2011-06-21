@@ -25,6 +25,7 @@ ifeq "$(OS)" "mingw32"
 endif
 ifeq "$(OS)" "linux"
 	ADDL_CFLAGS=-DBUILD_LINUX -rdynamic
+	ADDL_LDFLAGS=-rdynamic
 endif 
 
 # default for release configs
@@ -49,7 +50,7 @@ ifeq "$(CFG)" "Debug"
 	CXXFLAGS=-I../../ -I$(HEADERDIR) -I./cpp  -pg -g -ggdb -gstabs -Wall -c $(SDL_CFLAGS) $(ADDL_CFLAGS)
 endif
 
-LINKLIBS=-L../../$(CFG) -L$(LIBDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer -lSDL_gfx -lSDL_ttf
+LINKLIBS=$(ADDL_LDFLAGS) -L../../$(CFG) -L$(LIBDIR) -l$(LINKLIB) $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer -lSDL_gfx -lSDL_ttf
 
 BINOBJ=$(OUTDIR)/demo.o
 

@@ -4,7 +4,7 @@ CFLAGS=$(CFLAGS) -I/usr/local/include -I/usr/include
 LDFLAGS=$(LDFLAGS) -L/usr/local/lib -L/usr/lib
 
 .PHONY: packages
-packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg backtrace
+packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg backtrace yaml-cpp
 
 .PHONY: SDL
 SDL:
