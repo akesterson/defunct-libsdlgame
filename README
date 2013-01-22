@@ -1,0 +1,109 @@
+libsdlgame
+==========
+
+libSDLGame is a C++ library for writing games in SDL. It has been tested
+on Windows XP, Windows 7, Ubuntu Linux, and Mac OS X 10.5/10.6
+
+Building
+========
+
+After making sure you have all the dependencies:
+
+    make OS=[mingw32|linux|macosx]
+    make OS=[mingw32|linux|macosx] install
+
+You can do:
+
+    make CFG=[Debug|Release]
+
+... to say whether you want a debug build or a release build. Debug builds have gstabs and gdb info, while Release builds are more optimized and stripped.
+
+Using
+=====
+
+Include it with:
+
+    #include <libsdlgame/libsdlgame.h>
+
+... and link it with:
+
+    SDL_CFLAGS=$(shell sdl-config --cflags)
+    SDL_LDFLAGS=$(shell sdl-config --libs)
+    ld -lsdlgame $(SDL_LDFLAGS) -lSDL_image -lSDL_mixer -lSDL_gfx -lSDL_ttf
+
+Demos
+=====
+
+There are various tiny demos in ./demos/. Type "make demos" to build them; if that fails, cd into each demo, and do "make".
+
+Games using this engine
+=======================
+
+My spaceshooter demo's C++ port uses this engine (see akesterson/spaceshooter ).
+
+Development Status
+==================
+
+libsdlgame is a pet project that I pick up from time to time. It is not
+branched well, and may often have working code intermixed with broken code
+in the default production branch.
+
+I do my best to keep this code working, but your best bet to see which code is
+working, until I get my act together, is to check 'make demos' to see
+which demos compile and run.
+
+More Specific Status
+====================
+
+In general, the following things work:
+
+* Loading and looping background music from files
+* Loading and playing sound effects from files
+* Loading and animating sprites from files
+* Managing multiple render viewports
+* Managing a list of stateful actors on the screen
+* On-screen menus and menu items (left/right selection options, on/off)
+
+Dependencies
+============
+
+libsdlgame has a number of dependencies:
+
+* GNU Compiler Collection (COMPLETELY UNTESTED on MSVC, Xcode, etc)
+* GNU bintools
+* GNU make
+* libsdl
+* zlib
+* libpng
+* libjpeg
+* libtiff
+* SDL_image
+* libvorbis
+* flac
+* SDL_mixer
+* freetype
+* SDL_ttf
+* SDL_gfx
+* backtrace (for win32 targets - *nix/OS X targets don't need this)
+
+The following dependencies are needed for some beta functionality, and may be supplanted/changed/completely replaced in the near future; they have been
+removed from the default targets in 'make deps'.
+
+* libxml2
+* cmake
+* ffmpeg
+* SDL_ffmpeg
+* yaml-cpp
+
+Building Dependencies
+=====================
+
+On mingw32, you can use:
+
+    make OS=mingw32 deps
+
+.. On linux targets, you can probably figure out how to install all of the required packages, but on Ubuntu you can do:
+
+    make OS=linux deps
+
+There is no dependency makefile for Mac OS X; I obviously intended to make one, but never did. Regardless, homebrew or macports should have everything you need, if you don't want to install everything into your native OS X.
