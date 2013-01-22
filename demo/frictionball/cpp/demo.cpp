@@ -3,7 +3,7 @@
  * more realistic bouncing effect, and bring the ball to a halt
  */
 
-#include <libgame/libgame.h>
+#include <libsdlgame/libsdlgame.h>
 
 int main(int argc, char *argv[])
 {

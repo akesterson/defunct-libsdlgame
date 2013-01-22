@@ -3,7 +3,7 @@ all: clean packages
 
 #
 .PHONY: packages
-packages: SDL SDL_image SDL_mixer SDL_ttf SDL_gfx libxml2 cmake yasm ffmpeg SDL_ffmpeg yaml-cpp
+packages: SDL SDL_image SDL_mixer SDL_ttf SDL_gfx libxml2 cmake yasm
 
 .PHONY: SDL
 SDL:
@@ -60,6 +60,6 @@ libxml2:
 	sudo apt-get install libxml2-dev
 
 .PHONY: clean
-clean:	
+clean:
 	rm -rf *gz *zip *bz2
 	find . -maxdepth 1 -type d -iname "[a-zA-Z0-9]*" -exec rm -rf \{\} \;

@@ -8,7 +8,7 @@
 
 // TODO: Add the ability to set a MenuOption to display as either text or as a slider for numeric values.
 
-typedef struct MenuRelation;
+struct MenuRelation;
 
 #define MENU_OPTYPE_CHOICE     0
 #define MENU_OPTYPE_RANGE      1
@@ -25,12 +25,12 @@ public:
   int rangeStart;
   int selected; // doesn't hold info on whether this is selected or not, holds the index of optlist or the range number that is currently selected
   int spinFree; // if this is set to 1, then the value is modified on the presence of a key DOWN event, not a key RELEASE.
-  
+
   MenuOption(std::string name, int rangeLow, int rangeHigh, int rangeStart, int spinFree, SDL_Surface *img);
   ~MenuOption();
   void clampValue(MenuRelation *relation = NULL, int defClampVal = 1);
   int getIntValue();
-  std::string getStringValue();	
+  std::string getStringValue();
   virtual int select(int value); // called by MenuDisplay to force selection to a given item
   virtual int whenhighlighted(); // called whenever the menu item is highlighted
   virtual int whenselected(); // called whenever the menu item is selected ("enter" is pressed on the item)
@@ -47,14 +47,14 @@ struct MenuRelation
     int relation;
     MenuRelation();
 };
- 
+
 // class for the menus in the game
 // This class dynamically creates actors for the menu options and such
 // the only actor you have to feed it is your pointer Animation
 class MenuDisplay : public Display2D
 {
 protected:
-	std::vector<MenuOption *> menuOptions; 
+	std::vector<MenuOption *> menuOptions;
 	std::vector<MenuRelation *> menuRelations;
 	std::vector<MenuDisplay *> subMenus;
 	Actor *pointerActor;
@@ -70,21 +70,21 @@ protected:
 	Animation *arrowDown;
 	Animation *arrowLeft;
 	Animation *arrowRight;
-public: 
+public:
 	MenuDisplay();
 	~MenuDisplay();
-	
+
 	void setCloseOption(std::string option);
 	void setSpacing(int spacing);
 	int setPointer(Animation *ptr);
 	void setMenuOrigin(Vector origin);
 	void setMenuImages(Animation *arrowLeft, Animation *arrowRight, Animation *arrowUp, Animation *arrowDown);
 	void setFont(std::string fontname, int pointsize, SDL_Color color, SDL_Color bgcolor);
-	
+
 	void update(int logicOnly = 0);
 	int handleEvent(SDL_Event *event);
 	void clampValue(MenuOption *opt, int defClamp);
-	
+
 	int setRelation(std::string opt1, std::string opt2, int relationType = MENURELATION_NODUPLICATE);
 	void setOption(std::string optName, std::string );
 	void setOption(std::string optName, int);

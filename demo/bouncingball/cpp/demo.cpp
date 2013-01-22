@@ -2,7 +2,7 @@
  * This demo just expands on the 'gravity' demo to show how one could create a primitive bouncing effect
  */
 
-#include <libgame/libgame.h>
+#include <libsdlgame/libsdlgame.h>
 
 int main(int argc, char *argv[])
 {
@@ -62,4 +62,5 @@ int main(int argc, char *argv[])
 	    }
 	    myGame.finishFrame();
 	}
+	return 0;
 }

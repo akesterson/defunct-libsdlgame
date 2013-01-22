@@ -1,4 +1,4 @@
-# This makefile is a bit hackish. I wrote it early in the AM. 
+# This makefile is a bit hackish. I wrote it early in the AM.
 # Fohgiveuhness, please!!
 
 ifndef $(CFG)
@@ -8,7 +8,7 @@ endif
 ifndef $(OS)
 	OS=mingw32
 endif
- 
+
 LIBNAME=sdlgame
 PROJECTHOME=$(shell pwd)
 SDL_CFLAGS=$(shell sdl-config --cflags)
@@ -21,7 +21,7 @@ EXESUFFIX=
 LIBSUFFIX=
 
 ifeq "$(OS)" "mingw32"
-	ADDL_CFLAGS=-rdynamic -mwindows -DOS_WIN32
+	ADDL_CFLAGS=-mwindows -DOS_WIN32
 	EXESUFFIX=.exe
 	LIBSUFFIX=.a
 	DEPMAKEFILE=Makefile.mingw32

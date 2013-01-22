@@ -4,7 +4,7 @@
  * in a parabola on the Y axis rather than simply going straight up or straight down.
  */
 
-#include <libgame/libgame.h>
+#include <libsdlgame/libsdlgame.h>
 
 int main(int argc, char *argv[])
 {

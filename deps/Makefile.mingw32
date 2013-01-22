@@ -4,7 +4,7 @@ CFLAGS=$(CFLAGS) -I/usr/local/include -I/usr/include
 LDFLAGS=$(LDFLAGS) -L/usr/local/lib -L/usr/lib
 
 .PHONY: packages
-packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake ffmpeg SDL_ffmpeg backtrace yaml-cpp
+packages: SDL zlib libpng libjpeg libtiff SDL_image libvorbis flac SDL_mixer freetype SDL_ttf SDL_gfx libxml2 cmake backtrace
 
 .PHONY: SDL
 SDL:
@@ -103,10 +103,7 @@ SDL_gfx:
 
 .PHONY: libxml2
 libxml2:
-	wget http://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-bin.zip/download
-	unzip -od /usr/local/ libxml2-2.4.12-bin.zip
-	wget http://sourceforge.net/projects/gnuwin32/files/libxml/2.4.12-1/libxml2-2.4.12-1-lib.zip/download
-	unzip -od /usr/local/ libxml2-2.4.12-1-lib.zip
+	mingw-get install msys-libxml2
 
 .PHONY: doxygen
 doxygen:
@@ -122,11 +119,17 @@ cmake:
 #wget http://www.cmake.org/files/v2.8/cmake-2.8.4.tar.gz
 #cd cmake-2.8.4 && ./configure && make && make install
 
+.PHONY: yasm
+yasm:
+	wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
+	tar -zxvf yasm-1.2.0.tar.gz
+	cd yasm-1.2.0 && ./configure --prefix=/usr/local && make && make install
+
 .PHONY: ffmpeg
 ffmpeg:
-	wget http://www.ffmpeg.org/releases/ffmpeg-0.7-rc1.tar.gz
-	tar -zxvf ffmpeg-0.6.3.tar.gz
-	cd ffmpeg-0.6.3 && ./configure $(FFMPEG_CONFIGURE_FLAGS) && make && make install
+	wget http://ffmpeg.org/releases/ffmpeg-1.1.1.tar.gz
+	tar -zxvf ffmpeg-1.1.1.tar.gz
+	cd ffmpeg-1.1.1 && ./configure $(FFMPEG_CONFIGURE_FLAGS) && make && make install
 
 .PHONY: SDL_ffmpeg
 SDL_ffmpeg:
@@ -150,6 +153,6 @@ backtrace:
 	cd backtrace-mingw-read-only && make && cp backtrace.dll /usr/local/lib/
 
 .PHONY: clean
-clean:	
+clean:
 	rm -rf *gz *zip *bz2
 	find . -maxdepth 1 -type d -iname "[a-zA-Z0-9]*" -exec rm -rf \{\} \;

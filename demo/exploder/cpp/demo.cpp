@@ -1,4 +1,4 @@
-#include <libgame/libgame.h>
+#include <libsdlgame/libsdlgame.h>
 
 int main(int argc, char *argv[])
 {
@@ -30,4 +30,5 @@ int main(int argc, char *argv[])
 		}
 		myGame.finishFrame();
 	}
+	return 0;
 }

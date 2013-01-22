@@ -1,16 +1,16 @@
 /*
- * This demo expands on the frictionball demo. It shows how to create objects dynamically, by 
+ * This demo expands on the frictionball demo. It shows how to create objects dynamically, by
  * creating an explosion every time the ball touches the ground
  */
 
-#include <libgame/libgame.h>
+#include <libsdlgame/libsdlgame.h>
 #include <string>
 
 int main(int argc, char *argv[])
 {
 	Display2D display = Display2D();
 	Game &myGame = Game::NewSingleton();
-	Actor ball; 
+	Actor ball;
 	Actor *exploder = NULL;
 	float gravity = 0.1;
 	//int exploderCount = 0;
@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 		exploder->setState(STATE_DYING);
 		exploder->setPosition(actorPos);
 		display.addActor(exploder, LAYER_SPRITE2);
-                
+
 		actorPos.y = (480 - ball.nextFrame()->h);
 		ball.setPosition(actorPos);
 	    }

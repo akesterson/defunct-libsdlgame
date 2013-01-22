@@ -1,4 +1,4 @@
-# This makefile is a bit hackish. I wrote it early in the AM. 
+# This makefile is a bit hackish. I wrote it early in the AM.
 # Fohgiveuhness, please!!
 
 
@@ -10,7 +10,7 @@ endif
 ifndef $(OS)
 	OS=linux
 endif
- 
+
 TARGET=demo
 BINTARGET=$(TARGET)
 PROJECTHOME=$(shell pwd)
@@ -21,12 +21,12 @@ HEADERDIR=/usr/include
 ADDL_CFLAGS=
 
 ifeq "$(OS)" "mingw32"
-	ADDL_CFLAGS=-mwindows -DBUILD_MINGW32 -rdynamic
+	ADDL_CFLAGS=-mwindows -DBUILD_MINGW32
 endif
 ifeq "$(OS)" "linux"
 	ADDL_CFLAGS=-DBUILD_LINUX -rdynamic
 	ADDL_LDFLAGS=-rdynamic
-endif 
+endif
 
 # default for release configs
 ifeq "$(CFG)" "Release"
@@ -64,30 +64,33 @@ LD = $(CXX)
 INSTALL = $(which install)
 
 $(OUTDIR)/%.o : cpp/%.cpp
+	mkdir -p $(OUTDIR)
 	$(CXX) $(CXXFLAGS) -o $@ $<
 
 all: bin
 
 .PHONY: $(BTOBJ)
-$(BTOBJ): 
-	cp /usr/local/lib/backtrace.dll $(OUTDIR)/
-	cp /usr/local/lib/av*dll $(OUTDIR)/
-	cp /usr/local/lib/swscale*dll $(OUTDIR)/
-	cp /usr/local/bin/*SDL*dll $(OUTDIR)/
-	cp /usr/local/bin/freetype*dll $(OUTDIR)/
-	cp /usr/local/bin/*png*dll $(OUTDIR)/
-	cp /usr/local/bin/*jpeg*dll $(OUTDIR)/
-	cp /usr/local/bin/libimage*dll $(OUTDIR)/
-	cp /usr/local/bin/libogg*dll $(OUTDIR)/
-	cp /usr/local/bin/*vorbis*dll $(OUTDIR)/
-	cp /usr/local/bin/librle*dll $(OUTDIR)/
-	cp /usr/local/bin/libtiff*dll $(OUTDIR)/
-	cp /usr/local/bin/libxml2*dll $(OUTDIR)/
-	cp /usr/local/bin/zlib*dll $(OUTDIR)/
+$(BTOBJ):
+        if [ "$(OS)" == "mingw32" ]; then \
+		cp /usr/local/lib/backtrace.dll $(OUTDIR)/ \
+		cp /usr/lib/*av*dll* $(OUTDIR)/ \
+		cp /lib/*swscale*dll* $(OUTDIR)/ \
+		cp /usr/local/bin/*SDL*dll $(OUTDIR)/ \
+		cp /usr/local/bin/freetype*dll $(OUTDIR)/ \
+		cp /usr/local/bin/*png*dll $(OUTDIR)/ \
+		cp /usr/local/bin/*jpeg*dll $(OUTDIR)/ \
+		cp /usr/local/bin/libimage*dll $(OUTDIR)/ \
+		cp /usr/local/bin/libogg*dll $(OUTDIR)/ \
+		cp /usr/local/bin/*vorbis*dll $(OUTDIR)/ \
+		cp /usr/local/bin/librle*dll $(OUTDIR)/ \
+		cp /usr/local/bin/libtiff*dll $(OUTDIR)/ \
+		cp /lib/libxml2*dll* $(OUTDIR)/ \
+		cp /usr/local/bin/zlib*dll $(OUTDIR)/ \
+	fi
 
 bin: $(BINOBJ) $(BTOBJ)
 	$(LD) -pg -o $(OUTDIR)/$(BINTARGET) \
-		-pg $(BINOBJ) $(LINKLIBS)  
+		-pg $(BINOBJ) $(LINKLIBS)
 
 .PHONY: clean
 clean:
